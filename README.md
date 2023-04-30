@@ -17,3 +17,9 @@ symfony console make:fixtures
 ```bash
 symfony console doctrine:fixtures:load
 ```
+
+### Mise en place du système d'authentification : l'entité User
+
+```bash
+symfony console make:user
+```
