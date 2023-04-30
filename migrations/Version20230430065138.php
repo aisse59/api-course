@@ -14,7 +14,7 @@ final class Version20230430065138 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return 'mise en place de l authentification avec l entité User;
+        return 'mise en place de l authentification avec l entité User';
     }
 
     public function up(Schema $schema): void
