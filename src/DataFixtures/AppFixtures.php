@@ -31,11 +31,14 @@ class AppFixtures extends Fixture
         $faker = \Faker\Factory::create();
         $startDate = new DateTime('-6 months');
         $endDate = new DateTime('now');
-        $chrono = 1;
-
+        
         for($u = 0; $u < 10; $u++) {
             $user = new User();
+            
+            $chrono = 1;
+
             $hash = $this->hasher->hashPassword($user,"password");
+
             $user->setFirstName($faker->firstName())
                  -> setLastName($faker->lastName) 
                  ->setEmail($faker->email)
