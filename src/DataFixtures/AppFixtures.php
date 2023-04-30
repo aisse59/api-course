@@ -11,10 +11,21 @@ use App\Entity\Customer;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * L'encodeur de mots de passe
+     *
+     * @var UserPasswordHasherInterface
+     */
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
     public function load(ObjectManager $manager): void
     {
         $faker = \Faker\Factory::create();
@@ -24,10 +35,11 @@ class AppFixtures extends Fixture
 
         for($u = 0; $u < 10; $u++) {
             $user = new User();
+            $hash = $this->hasher->hashPassword($user,"password");
             $user->setFirstName($faker->firstName())
                  -> setLastName($faker->lastName) 
                  ->setEmail($faker->email)
-                 ->setPassword("password");
+                 ->setPassword($hash);
 
             $manager->persist($user);    
 
@@ -58,5 +70,15 @@ class AppFixtures extends Fixture
         
 
         $manager->flush();
+    }
+
+    /**
+     * Get l'encodeur de mots de passe
+     *
+     * @return  UserPasswordHasherInterface
+     */ 
+    public function getHasher()
+    {
+        return $this->hasher;
     }
 }
