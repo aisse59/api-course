@@ -23,3 +23,9 @@ symfony console doctrine:fixtures:load
 ```bash
 symfony console make:user
 ```
+
+### Installer le composant API Platform
+
+```bash
+composer require api
+```
