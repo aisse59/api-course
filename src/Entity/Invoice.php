@@ -6,11 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\InvoiceRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 
-#[ApiResource(paginationEnabled: true)]
+
 
 /**
  * @ORM\Entity(repositoryClass=InvoiceRepository::class)
- * @ApiResource(attributes={"pagination_enabled"= true})
+ * @ApiResource(
+ *  attributes={
+ *      "pagination_enabled"= true,
+ *      "pagination_items_per_page"=20
+ * }
+ * )
  */
 class Invoice
 {
